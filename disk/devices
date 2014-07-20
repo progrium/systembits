@@ -1,3 +1,3 @@
 #!/bin/bash
 echo "[disk.sizes]"
-df | grep /dev/ | sed "s|/dev/||" | awk '{print $1"="$2}'
+df -P | grep /dev/ | sed "s|/dev/||" | awk '{print $1"="$2}'
