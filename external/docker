@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 echo "[docker]"
 echo "running=$(docker ps -q | wc -l)"
 echo "containers=["
