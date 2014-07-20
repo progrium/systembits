@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "[docker]"
+echo "running=$(docker ps -q | wc -l)"
+echo "containers=["
+docker ps | grep -v "CONTAINER ID" | awk '{print "\""( $(NF) )"\",\n"}'
+echo "]"

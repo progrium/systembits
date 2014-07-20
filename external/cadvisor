@@ -1,0 +1,17 @@
+#!/bin/bash
+machine="$(curl -s http://localhost:8080/api/v1.0/machine)"
+stats="$(curl -s localhost:8080/api/v1.0/containers/ | jq '.stats[.stats|length-1]')"
+
+echo "[cpu]"
+echo "num_cores=$(echo $machine | jq .num_cores)"
+echo "load=$(echo $stats | jq .cpu.load)"
+
+echo "[cpu.usage]"
+echo "system=$(printf "%.f" $(echo $stats | jq '.cpu.usage.system'))"
+echo "user=$(printf "%.f" $(echo $stats | jq '.cpu.usage.user'))"
+echo "total=$(printf "%.f" $(echo $stats | jq '.cpu.usage.total'))"
+echo "per_cpu=$(echo $stats | jq .cpu.usage.per_cpu)"
+
+echo "[memory]"
+echo "capacity=$(echo $machine | jq .memory_capacity)"
+echo "used=$(echo $stats | jq .memory.usage)"

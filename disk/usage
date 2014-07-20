@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "[disk.usage]"
+df --total | grep total | awk '{print "used="$3"\navailable="$4}'

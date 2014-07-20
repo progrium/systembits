@@ -1,0 +1,13 @@
+#!/usr/bin/ruby
+
+require "toml"
+require "json"
+
+bits = {}
+merger = proc { |key, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : v2 }
+Dir['**/*'].each do |f|
+	if File.executable?(f) and not File.directory?(f) and f.include?("/")
+		bits.merge!(TOML.parse(`./#{f}`), &merger) #rescue nil
+	end
+end
+puts JSON.dump(bits)
