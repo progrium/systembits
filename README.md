@@ -4,7 +4,7 @@ Simplest possible system profiler protocol and tool for Linux. Like ohai but jus
 
 ## Using systembits
 
-Systembits is a collection of system probes (or bits) that can be run individually or run together to merge into a single datastructure. Here's example output from the default bits, pretty-printed with `jq`:
+Systembits is a collection of system probes (or bits) that can be run individually or run together to merge into a single JSON data structure. Here's example output from the default bits, pretty-printed with `jq`:
 
 	$ ./systembits | jq .
 	{
