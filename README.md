@@ -43,8 +43,10 @@ In this implementation, you can disable probes by either removing them or turnin
 Here is an example probe:
 
 	#!/bin/bash
-	echo "[disk.usage]"
-	df --total | grep total | awk '{print "used="$3"\navailable="$4}'
+	echo "[cpu.usage]"
+	echo "system=$(top -b -n 1 | grep Cpu | awk '{print $4}')"
+	echo "user=$(top -b -n 1 | grep Cpu | awk '{print $2}')"
+	echo "total=$(top -b -n 1 | grep Cpu | awk '{print $2+$4}')"
 
 See how simple that is? It's not a "plugin" for a fancy framework using some DSL made in Ruby. It's a shell script, it can be any language, it just needs to output TOML.
 
