@@ -4,10 +4,33 @@ Simplest possible system profiler protocol and tool for Linux. Like ohai but jus
 
 ## Using systembits
 
-Systembits is a collection of system probes (or bits) that can be run individually or run together to merge into a single datastructure. Here's example output:
+Systembits is a collection of system probes (or bits) that can be run individually or run together to merge into a single datastructure. Here's example output from the default bits, pretty-printed with `jq`:
 
-	$ ./systembits
-	{"disk":{"sizes":{"sda1":41251136},"usage":{"used":189420964,"available":95594296}},"cpu":{"num_cores":1,"load":0,"usage":{"system":2284480000000,"user":1366350000000,"total":3542828701229,"per_cpu":[3542828701229]}},"memory":{"capacity":1042341888,"used":595714048},"docker":{"running":3,"containers":["furious_brattain","cocky_sammet","consul"]}}
+	$ ./systembits | jq .
+	{
+	  "memory": {
+	    "used": 935920,
+	    "capacity": 1017912
+	  },
+	  "disk": {
+	    "usage": {
+	      "available": 95184496,
+	      "used": 189830764
+	    },
+	    "sizes": {
+	      "sda1": 41251136
+	    }
+	  },
+	  "cpu": {
+	    "load": 0.01,
+	    "num_cores": 1,
+	    "usage": {
+	      "total": 4.9,
+	      "user": 2.1,
+	      "system": 2.8
+	    }
+	  }
+	}
 
 ## Probe protocol
 
