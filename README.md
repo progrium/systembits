@@ -32,13 +32,9 @@ Systembits is a collection of system probes (or bits) that can be run individual
 	  }
 	}
 
-## Probe protocol
+## Probe protocol: TOML over STDOUT
 
-The heart of systembits is really a standard protocol for collecting system probe data into an easy-to-consume JSON structure from easy-to-produce TOML structures.
-
-The implementation included here as `./systemsbits` is a simple Ruby script that walks subdirectories for executable scripts, collects their TOML output, does a recursive merge of it all into a single data structure, and outputs JSON. 
-
-In this implementation, you can disable probes by either removing them or turning off their execute bit. 
+The heart of systembits is a simple protocol for collecting system probe data into an easy-to-consume JSON structure from easy-to-produce TOML structures.
 
 Here is an example probe:
 
@@ -49,6 +45,10 @@ Here is an example probe:
 	echo "total=$(top -b -n 1 | grep Cpu | awk '{print $2+$4}')"
 
 See how simple that is? It's not a "plugin" for a fancy framework using some DSL made in Ruby. It's a shell script, it can be any language, it just needs to output TOML.
+
+The collector included (`./systemsbits`) is a simple Ruby script that just walks subdirectories for executable scripts, collects their TOML output, does a recursive merge of it all into a single data structure, and outputs JSON. 
+
+In this implementation, you can disable probes by either removing them or turning off their execute bit. 
 
 Since this puts the emphasis on the probes, you can do the collection and merging however you like. Maybe you want to make a web API to the collected probe data and run the probes concurrently. Ignore `./systembits` and just do that yourself then, using all the same probes.
 
