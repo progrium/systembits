@@ -1,1 +1,6 @@
 #!/bin/bash
+set -eo pipefail
+
+echo "[memory]"
+echo "capacity=$(procfs meminfo/MemTotal)"
+echo "used=$(procfs meminfo | jq ".MemTotal - .MemFree")"

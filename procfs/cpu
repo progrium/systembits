@@ -1,0 +1,6 @@
+#!/bin/bash
+set -eo pipefail
+
+echo "[cpu]"
+echo "num_cores=$(procfs cpuinfo | jq ".[].cpu_cores" | awk '{s+=$1} END {print s}')"
+echo "load=$(procfs loadavg/average/1)"

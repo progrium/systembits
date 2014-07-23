@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "[cpu.usage]"
+echo "system=$(top -b -n 1 | grep Cpu | awk '{print $4}')"
+echo "user=$(top -b -n 1 | grep Cpu | awk '{print $2}')"
+echo "total=$(top -b -n 1 | grep Cpu | awk '{print $2+$4}')"
